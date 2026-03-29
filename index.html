@@ -14,18 +14,40 @@
         h1 { font-size: clamp(32px, 8vw, 50px); margin-bottom: 10px; letter-spacing: 2px; background: linear-gradient(45deg, #fff, #00ccff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         .typing-container { min-height: 30px; margin-bottom: 40px; }
-        .typing { font-size: 20px; color: #aaa; border-right: 2px solid #00ccff; display: inline-block; white-space: nowrap; overflow: hidden; padding-right: 5px; }
+        .typing { font-size: 20px; color: #aaa; border-right: 2px solid #00ccff; display: inline-block; white-space: nowrap; overflow: hidden; padding-right: 5px; animation: blink 0.8s step-end infinite; }
 
-        /* 文章列表样式 */
-        .article-list { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 16px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: left; transition: 0.3s; }
-        .article-list:hover { border-color: rgba(0, 204, 255, 0.5); }
-        .article-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; text-decoration: none; color: #ddd; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: 0.2s; }
-        .article-item:last-child { border-bottom: none; }
-        .article-item:hover { background: rgba(0, 204, 255, 0.1); color: #fff; transform: translateX(5px); }
-        .article-date { font-size: 14px; color: #666; }
+        /* 文章列表卡片 */
+        .article-list { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border-radius: 20px; padding: 30px; border: 1px solid rgba(255, 255, 255, 0.08); text-align: left; }
+        
+        .list-header { margin-bottom: 20px; font-weight: bold; color: #00ccff; font-size: 18px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(0, 204, 255, 0.2); padding-bottom: 10px; }
+        
+        .article-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; text-decoration: none; color: #ddd; border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s ease; border-radius: 8px; }
+        .article-item:last-of-type { border-bottom: none; }
+        .article-item:hover { background: rgba(0, 204, 255, 0.1); color: #fff; transform: translateX(8px); }
+        .article-date { font-size: 14px; color: #555; }
+
+        /* 历史文章跳转按钮 */
+        .history-btn-wrapper { margin-top: 30px; text-align: center; }
+        .history-btn {
+            display: inline-block;
+            padding: 12px 32px;
+            color: #00ccff;
+            text-decoration: none;
+            font-size: 15px;
+            border: 1px solid rgba(0, 204, 255, 0.4);
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            position: relative;
+            background: rgba(0, 204, 255, 0.05);
+        }
+        .history-btn:hover {
+            background: #00ccff;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 204, 255, 0.6);
+            transform: translateY(-3px);
+        }
 
         @keyframes blink { 50% { border-color: transparent; } }
-        .typing { animation: blink 0.8s step-end infinite; }
     </style>
 </head>
 <body>
@@ -39,7 +61,7 @@
     </div>
 
     <div class="article-list">
-        <div style="margin-bottom: 15px; font-weight: bold; color: #00ccff; font-size: 18px;">📖 最新文章</div>
+        <div class="list-header">✨ 近期发布</div>
         
         <a href="posts/first-blog.html" class="article-item">
             <span class="article-title">欢迎来到我的个人博客</span>
@@ -47,20 +69,19 @@
         </a>
 
         <a href="#" class="article-item">
-            <span class="article-title">如何使用 GitHub Pages 搭建网站</span>
+            <span class="article-title">GitHub Pages 进阶指南</span>
             <span class="article-date">2024-05-21</span>
         </a>
 
-        <a href="#" class="article-item">
-            <span class="article-title">我的技术栈与学习心得</span>
-            <span class="article-date">2024-05-22</span>
-        </a>
+        <div class="history-btn-wrapper">
+            <a href="history.html" class="history-btn">查看历史文章 (History) →</a>
+        </div>
     </div>
 </div>
 
 <script>
-    // 打字机
-    const text = "探索技术与生活的交汇点";
+    // 打字机逻辑
+    const text = "记录技术点滴，分享生活瞬间";
     const target = document.getElementById("type-text");
     let i = 0;
     function typing() {
@@ -72,22 +93,22 @@
     }
     window.onload = typing;
 
-    // 粒子背景
+    // 粒子背景逻辑
     const pContainer = document.getElementById("particles");
     for (let n = 0; n < 40; n++) {
         let s = document.createElement("div");
         let size = Math.random() * 2 + 1;
         s.style.cssText = `
             position: absolute; width: ${size}px; height: ${size}px;
-            background: rgba(255,255,255,${Math.random() * 0.5 + 0.2});
+            background: rgba(255,255,255,${Math.random() * 0.4 + 0.1});
             border-radius: 50%; top: ${Math.random() * 100}%; left: ${Math.random() * 100}%;
         `;
         pContainer.appendChild(s);
         s.animate([
             { transform: 'translate(0, 0)' },
-            { transform: `translate(${Math.random() * 60 - 30}px, ${Math.random() * 60 - 30}px)` },
+            { transform: `translate(${Math.random() * 80 - 40}px, ${Math.random() * 80 - 40}px)` },
             { transform: 'translate(0, 0)' }
-        ], { duration: Math.random() * 8000 + 8000, iterations: Infinity });
+        ], { duration: Math.random() * 10000 + 10000, iterations: Infinity });
     }
 </script>
 </body>
