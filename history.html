@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>归档 | 历史文章</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+        body { background: #0a0a10; color: #fff; min-height: 100vh; padding: 50px 20px; display: flex; flex-direction: column; align-items: center; }
+        
+        /* 返回按钮 */
+        .back-btn { position: fixed; top: 20px; left: 20px; color: #aaa; text-decoration: none; font-size: 14px; transition: 0.3s; z-index: 10; }
+        .back-btn:hover { color: #00ccff; }
+
+        h1 { margin-bottom: 50px; font-size: 28px; letter-spacing: 2px; color: #00ccff; }
+
+        /* 时间轴容器 */
+        .timeline { position: relative; max-width: 600px; width: 100%; }
+        
+        /* 中间的竖线 */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: rgba(0, 204, 255, 0.2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 60px;
+        }
+
+        /* 时间轴上的小圆点 */
+        .timeline-dot {
+            position: absolute;
+            left: 15px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: #00ccff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ccff;
+        }
+
+        .timeline-date {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s;
+            text-decoration: none;
+            display: block;
+            color: #ddd;
+        }
+
+        .timeline-content:hover {
+            background: rgba(0, 204, 255, 0.08);
+            border-color: rgba(0, 204, 255, 0.3);
+            transform: translateX(10px);
+            color: #fff;
+        }
+
+        .timeline-title { font-size: 18px; margin-bottom: 5px; }
+        .timeline-desc { font-size: 14px; color: #777; line-height: 1.6; }
+
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            .timeline::before { left: 10px; }
+            .timeline-dot { left: 5px; }
+            .timeline-item { padding-left: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn">← 返回主页</a>
+
+    <h1>文章归档</h1>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2024年5月</div>
+            <a href="posts/first-blog.html" class="timeline-content">
+                <div class="timeline-title">我的第一篇博客文章</div>
+                <div class="timeline-desc">在这里记录下开启 GitHub Pages 的心路历程...</div>
+            </a>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2024年4月</div>
+            <a href="#" class="timeline-content">
+                <div class="timeline-title">前端开发中的色彩美学</div>
+                <div class="timeline-desc">探讨如何在深色模式下利用霓虹色提升视觉体验。</div>
+            </a>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2024年3月</div>
+            <a href="#" class="timeline-content">
+                <div class="timeline-title">VS Code 插件推荐清单</div>
+                <div class="timeline-desc">工欲善其事，必先利其器。分享我最常用的 10 个插件。</div>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
