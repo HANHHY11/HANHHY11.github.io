@@ -1,67 +1,94 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HANHHY11 | 个人主页</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-body{background:#0a0a10;color:#fff;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 20px}
-#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
-.content{z-index:1}
-h1{font-size:50px;margin-bottom:20px;letter-spacing:2px}
-.typing{font-size:22px;color:#aaa;border-right:3px solid #00ccff;white-space:nowrap;overflow:hidden}
-.buttons{margin-top:40px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.btn{padding:14px 28px;border-radius:8px;text-decoration:none;color:#fff;background:#0066ff;border:none;font-size:16px;transition:0.3s}
-.btn:hover{background:#0088ff;transform:translateY(-3px)}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HANHHY11 | 文章专栏</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background: #0a0a10; color: #fff; min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        
+        #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        
+        .content { z-index: 1; padding: 40px 20px; max-width: 800px; width: 100%; text-align: center; }
+        h1 { font-size: clamp(32px, 8vw, 50px); margin-bottom: 10px; letter-spacing: 2px; background: linear-gradient(45deg, #fff, #00ccff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .typing-container { min-height: 30px; margin-bottom: 40px; }
+        .typing { font-size: 20px; color: #aaa; border-right: 2px solid #00ccff; display: inline-block; white-space: nowrap; overflow: hidden; padding-right: 5px; }
+
+        /* 文章列表样式 */
+        .article-list { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 16px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: left; transition: 0.3s; }
+        .article-list:hover { border-color: rgba(0, 204, 255, 0.5); }
+        .article-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; text-decoration: none; color: #ddd; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: 0.2s; }
+        .article-item:last-child { border-bottom: none; }
+        .article-item:hover { background: rgba(0, 204, 255, 0.1); color: #fff; transform: translateX(5px); }
+        .article-date { font-size: 14px; color: #666; }
+
+        @keyframes blink { 50% { border-color: transparent; } }
+        .typing { animation: blink 0.8s step-end infinite; }
+    </style>
 </head>
 <body>
+
 <div id="particles"></div>
+
 <div class="content">
-  <h1>HANHHY11</h1>
-  <div class="typing">GitHub Pages 永久免费个人网站</div>
-  <div class="buttons">
-    <a href="#" class="btn">首页</a>
-    <a href="#" class="btn">项目</a>
-    <a href="#" class="btn">关于</a>
-  </div>
+    <h1>HANHHY11</h1>
+    <div class="typing-container">
+        <div class="typing" id="type-text"></div>
+    </div>
+
+    <div class="article-list">
+        <div style="margin-bottom: 15px; font-weight: bold; color: #00ccff; font-size: 18px;">📖 最新文章</div>
+        
+        <a href="posts/first-blog.html" class="article-item">
+            <span class="article-title">欢迎来到我的个人博客</span>
+            <span class="article-date">2024-05-20</span>
+        </a>
+
+        <a href="#" class="article-item">
+            <span class="article-title">如何使用 GitHub Pages 搭建网站</span>
+            <span class="article-date">2024-05-21</span>
+        </a>
+
+        <a href="#" class="article-item">
+            <span class="article-title">我的技术栈与学习心得</span>
+            <span class="article-date">2024-05-22</span>
+        </a>
+    </div>
 </div>
 
 <script>
-// 打字机效果
-let text = "GitHub Pages 永久免费个人网站";
-let i = 0;
-function typing(){
-  if(i<text.length){
-    document.querySelector(".typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typing,100);
-  }
-}
-typing();
+    // 打字机
+    const text = "探索技术与生活的交汇点";
+    const target = document.getElementById("type-text");
+    let i = 0;
+    function typing() {
+        if (i < text.length) {
+            target.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, 150);
+        }
+    }
+    window.onload = typing;
 
-// 简化粒子背景
-let p = document.getElementById("particles");
-for(let n=0;n<50;n++){
-  let s = document.createElement("div");
-  s.style.cssText = `
-    position:absolute;
-    width:${Math.random()*3+1}px;
-    height:${Math.random()*3+1}px;
-    background:#fff;
-    border-radius:50%;
-    top:${Math.random()*100}%;
-    left:${Math.random()*100}%;
-    opacity:${Math.random()*0.6+0.2};
-    animation:float ${Math.random()*10+10}s linear infinite`;
-  p.appendChild(s);
-}
-
-let style = document.createElement('style');
-style.innerHTML = `@keyframes float{0%{transform:translate(0,0)}50%{transform:translate(${Math.random()*40-20}px,${Math.random()*40-20}px)}100%{transform:translate(0,0)}}`;
-document.head.appendChild(style);
+    // 粒子背景
+    const pContainer = document.getElementById("particles");
+    for (let n = 0; n < 40; n++) {
+        let s = document.createElement("div");
+        let size = Math.random() * 2 + 1;
+        s.style.cssText = `
+            position: absolute; width: ${size}px; height: ${size}px;
+            background: rgba(255,255,255,${Math.random() * 0.5 + 0.2});
+            border-radius: 50%; top: ${Math.random() * 100}%; left: ${Math.random() * 100}%;
+        `;
+        pContainer.appendChild(s);
+        s.animate([
+            { transform: 'translate(0, 0)' },
+            { transform: `translate(${Math.random() * 60 - 30}px, ${Math.random() * 60 - 30}px)` },
+            { transform: 'translate(0, 0)' }
+        ], { duration: Math.random() * 8000 + 8000, iterations: Infinity });
+    }
 </script>
 </body>
 </html>
-<a href="posts/first-blog.html">阅读我的第一篇文章</a>
