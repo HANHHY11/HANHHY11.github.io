@@ -6,27 +6,44 @@
     <title>HANHHY11 | 文章专栏</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background: #0a0a10; color: #fff; min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        
+        body { 
+            /* 背景图指向 background.jpg */
+            background: linear-gradient(rgba(10, 10, 16, 0.7), rgba(10, 10, 16, 0.7)), 
+                        url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff; 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+        }
         
         #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-        
         .content { z-index: 1; padding: 40px 20px; max-width: 800px; width: 100%; text-align: center; }
         h1 { font-size: clamp(32px, 8vw, 50px); margin-bottom: 10px; letter-spacing: 2px; background: linear-gradient(45deg, #fff, #00ccff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
         .typing-container { min-height: 30px; margin-bottom: 40px; }
         .typing { font-size: 20px; color: #aaa; border-right: 2px solid #00ccff; display: inline-block; white-space: nowrap; overflow: hidden; padding-right: 5px; animation: blink 0.8s step-end infinite; }
 
-        /* 文章列表卡片 */
-        .article-list { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border-radius: 20px; padding: 30px; border: 1px solid rgba(255, 255, 255, 0.08); text-align: left; }
+        .article-list { 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px; 
+            padding: 30px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            text-align: left; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
         
         .list-header { margin-bottom: 20px; font-weight: bold; color: #00ccff; font-size: 18px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(0, 204, 255, 0.2); padding-bottom: 10px; }
-        
         .article-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; text-decoration: none; color: #ddd; border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s ease; border-radius: 8px; }
         .article-item:last-of-type { border-bottom: none; }
         .article-item:hover { background: rgba(0, 204, 255, 0.1); color: #fff; transform: translateX(8px); }
-        .article-date { font-size: 14px; color: #555; }
+        .article-date { font-size: 14px; color: #888; }
 
-        /* 历史文章跳转按钮 */
         .history-btn-wrapper { margin-top: 30px; text-align: center; }
         .history-btn {
             display: inline-block;
@@ -37,15 +54,10 @@
             border: 1px solid rgba(0, 204, 255, 0.4);
             border-radius: 50px;
             transition: all 0.4s ease;
-            position: relative;
             background: rgba(0, 204, 255, 0.05);
+            backdrop-filter: blur(5px);
         }
-        .history-btn:hover {
-            background: #00ccff;
-            color: #000;
-            box-shadow: 0 0 20px rgba(0, 204, 255, 0.6);
-            transform: translateY(-3px);
-        }
+        .history-btn:hover { background: #00ccff; color: #000; box-shadow: 0 0 20px rgba(0, 204, 255, 0.6); transform: translateY(-3px); }
 
         @keyframes blink { 50% { border-color: transparent; } }
     </style>
@@ -80,7 +92,6 @@
 </div>
 
 <script>
-    // 打字机逻辑
     const text = "记录技术点滴，分享生活瞬间";
     const target = document.getElementById("type-text");
     let i = 0;
@@ -93,22 +104,13 @@
     }
     window.onload = typing;
 
-    // 粒子背景逻辑
     const pContainer = document.getElementById("particles");
     for (let n = 0; n < 40; n++) {
         let s = document.createElement("div");
         let size = Math.random() * 2 + 1;
-        s.style.cssText = `
-            position: absolute; width: ${size}px; height: ${size}px;
-            background: rgba(255,255,255,${Math.random() * 0.4 + 0.1});
-            border-radius: 50%; top: ${Math.random() * 100}%; left: ${Math.random() * 100}%;
-        `;
+        s.style.cssText = `position: absolute; width: ${size}px; height: ${size}px; background: rgba(255,255,255,${Math.random() * 0.4 + 0.1}); border-radius: 50%; top: ${Math.random() * 100}%; left: ${Math.random() * 100}%;`;
         pContainer.appendChild(s);
-        s.animate([
-            { transform: 'translate(0, 0)' },
-            { transform: `translate(${Math.random() * 80 - 40}px, ${Math.random() * 80 - 40}px)` },
-            { transform: 'translate(0, 0)' }
-        ], { duration: Math.random() * 10000 + 10000, iterations: Infinity });
+        s.animate([{ transform: 'translate(0, 0)' }, { transform: `translate(${Math.random() * 80 - 40}px, ${Math.random() * 80 - 40}px)` }, { transform: 'translate(0, 0)' }], { duration: Math.random() * 10000 + 10000, iterations: Infinity });
     }
 </script>
 </body>
